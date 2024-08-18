@@ -2,9 +2,11 @@
     package="com.dicoding.ditonton">
     <uses-permission android:name="android.permission.INTERNET" />
    <application
+        android:allowBackup="true"
         android:label="ditonton"
         android:icon="@mipmap/ic_launcher">
         <activity
+            android:exported="true"
             android:name=".MainActivity"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"

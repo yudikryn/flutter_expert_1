@@ -24,7 +24,7 @@ void main() {
       // act
       final result = await dataSource.insertWatchlist(testMovieTable);
       // assert
-      expect(result, 'Added to Watchlist');
+      expect(result, 'Added to Watchlist Movie');
     });
 
     test('should throw DatabaseException when insert to database is failed',
@@ -48,7 +48,7 @@ void main() {
       // act
       final result = await dataSource.removeWatchlist(testMovieTable);
       // assert
-      expect(result, 'Removed from Watchlist');
+      expect(result, 'Removed from Watchlist Movie');
     });
 
     test('should throw DatabaseException when remove from database is failed',

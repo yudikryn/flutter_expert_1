@@ -2,6 +2,27 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:pmrset.gpx">
+   </FileRef>
+   <FileRef
+      location = "group:kosambi.gpx">
+   </FileRef>
+   <FileRef
+      location = "group:gambir.gpx">
+   </FileRef>
+   <FileRef
+      location = "group:mayapada.gpx">
+   </FileRef>
+   <FileRef
+      location = "group:lrtjkt.gpx">
+   </FileRef>
+   <FileRef
+      location = "group:aiacentral.gpx">
+   </FileRef>
+   <FileRef
+      location = "group:jakartautara.gpx">
+   </FileRef>
+   <FileRef
       location = "group:Runner.xcodeproj">
    </FileRef>
    <FileRef

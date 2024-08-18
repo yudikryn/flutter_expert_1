@@ -28,8 +28,8 @@ class MovieCard extends StatelessWidget {
               child: Container(
                 margin: const EdgeInsets.only(
                   left: 16 + 80 + 16,
-                  bottom: 8,
-                  right: 8,
+                  bottom: 16,
+                  right: 16,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

@@ -51,9 +51,15 @@ class _ListTvPageState extends State<ListTvPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Airing Today',
-                style: kHeading6,
+              _buildSubHeading(
+                title: 'Airing Today',
+                onTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    SubListTvPage.ROUTE_NAME,
+                    arguments: TYPE_AIRING,
+                  );
+                },
               ),
               Consumer<TvListNotifier>(builder: (context, data, child) {
                 final state = data.airingTodayTvState;

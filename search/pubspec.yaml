@@ -1,0 +1,25 @@
+name: search
+description: "A new Flutter package project."
+version: 0.0.1
+homepage:
+
+environment:
+  sdk: ^3.5.3
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  core:
+    path: ../core
+
+  dartz: ^0.10.0-nullsafety.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  mockito: ^5.0.8
+  build_runner: ^2.0.4
+  flutter_lints: ^4.0.0
+
+flutter:

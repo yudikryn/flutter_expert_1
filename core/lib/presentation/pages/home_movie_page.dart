@@ -1,7 +1,6 @@
 import 'list_tv_page.dart';
 import 'movie_detail_page.dart';
 import 'popular_movies_page.dart';
-import 'search_page.dart';
 import 'top_rated_movies_page.dart';
 import 'watchlist_movies_page.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -79,7 +78,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
             onPressed: () {
               Navigator.pushNamed(
                 context,
-                SearchPage.ROUTE_NAME,
+                SEARCH_ROUTE,
                 arguments: TYPE_MOVIE,
               );
             },

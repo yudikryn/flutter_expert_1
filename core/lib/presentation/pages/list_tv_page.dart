@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import '../../core.dart';
 import '../../domain/entities/tv.dart';
-import 'search_page.dart';
+import '../../utils/routes.dart';
 import 'sub_list_tv_page.dart';
 import 'tv_detail_page.dart';
 import '../provider/tv/tv_list_notifier.dart';
@@ -38,7 +38,7 @@ class _ListTvPageState extends State<ListTvPage> {
             onPressed: () {
               Navigator.pushNamed(
                 context,
-                SearchPage.ROUTE_NAME,
+                SEARCH_ROUTE,
                 arguments: TYPE_TV,
               );
             },

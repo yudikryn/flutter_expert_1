@@ -13,7 +13,9 @@ dependencies:
   core:
     path: ../core
 
-  dartz: ^0.10.0-nullsafety.2
+  dartz: ^0.10.1
+  flutter_bloc: ^8.1.6
+  equatable: ^2.0.3
 
 dev_dependencies:
   flutter_test:
@@ -21,5 +23,6 @@ dev_dependencies:
   mockito: ^5.0.8
   build_runner: ^2.0.4
   flutter_lints: ^4.0.0
+  bloc_test: ^9.1.7
 
 flutter:

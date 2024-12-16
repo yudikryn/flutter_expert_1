@@ -1,3 +1,5 @@
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+
 import 'list_tv_page.dart';
 import 'movie_detail_page.dart';
 import 'popular_movies_page.dart';
@@ -76,6 +78,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
         actions: [
           IconButton(
             onPressed: () {
+              FirebaseCrashlytics.instance.crash();
               Navigator.pushNamed(
                 context,
                 SEARCH_ROUTE,

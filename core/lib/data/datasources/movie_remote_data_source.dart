@@ -3,7 +3,7 @@ import 'dart:convert';
 import '../models/movie_detail_model.dart';
 import '../models/movie_model.dart';
 import '../models/movie_response.dart';
-import '../../utils//exception.dart';
+import '../../utils/exception.dart';
 import 'package:http/http.dart' as http;
 
 abstract class MovieRemoteDataSource {

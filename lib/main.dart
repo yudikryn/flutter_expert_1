@@ -32,10 +32,15 @@ import 'package:ditonton/injection.dart' as di;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await HttpSSLPinning.init();
+
+  di.init();
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  di.init();
+
   runApp(MyApp());
 }
 

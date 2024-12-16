@@ -35,9 +35,9 @@ import 'package:core/presentation/provider/tv/tv_list_notifier.dart';
 import 'package:core/presentation/provider/tv/tv_popular_notifier.dart';
 import 'package:core/presentation/provider/tv/tv_top_rated_notifier.dart';
 import 'package:core/presentation/provider/tv/tv_watchlist_notifier.dart';
+import 'package:core/utils/http_ssl_pinning.dart';
 import 'package:search/presentation/bloc/search_bloc.dart';
 import 'package:search/search.dart';
-import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
 
 import 'package:core/data/datasources/tv_local_data_source.dart';
@@ -181,5 +181,5 @@ void init() {
   locator.registerLazySingleton<DatabaseHelper>(() => DatabaseHelper());
 
   // external
-  locator.registerLazySingleton(() => http.Client());
+  locator.registerLazySingleton(() => HttpSSLPinning.client);
 }

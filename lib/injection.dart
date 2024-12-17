@@ -24,6 +24,7 @@ import 'package:core/domain/usecases/tv/get_tv_watchlist.dart';
 import 'package:core/domain/usecases/tv/get_tv_watchlist_status.dart';
 import 'package:core/domain/usecases/tv/remove_tv_watchlist.dart';
 import 'package:core/domain/usecases/tv/save_tv_watchlist.dart';
+import 'package:core/presentation/bloc/movie/list/movie_list_bloc.dart';
 import 'package:core/presentation/provider/movie/movie_detail_notifier.dart';
 import 'package:core/presentation/provider/movie/movie_list_notifier.dart';
 import 'package:core/presentation/provider/movie/popular_movies_notifier.dart';
@@ -36,7 +37,8 @@ import 'package:core/presentation/provider/tv/tv_popular_notifier.dart';
 import 'package:core/presentation/provider/tv/tv_top_rated_notifier.dart';
 import 'package:core/presentation/provider/tv/tv_watchlist_notifier.dart';
 import 'package:core/utils/http_ssl_pinning.dart';
-import 'package:search/presentation/bloc/search_bloc.dart';
+import 'package:search/presentation/bloc/movie/movie_search_bloc.dart';
+import 'package:search/presentation/bloc/tv/tv_search_bloc.dart';
 import 'package:search/search.dart';
 import 'package:get_it/get_it.dart';
 
@@ -47,7 +49,17 @@ final locator = GetIt.instance;
 void init() {
   // bloc
   locator.registerFactory(
-    () => SearchBloc(
+    () => MovieSearchBloc(
+      locator(),
+    ),
+  );
+    locator.registerFactory(
+    () => TvSearchBloc(
+      locator(),
+    ),
+  );
+    locator.registerFactory(
+    () => MovieListMoviesBloc(
       locator(),
     ),
   );

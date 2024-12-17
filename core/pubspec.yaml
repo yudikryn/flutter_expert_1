@@ -21,6 +21,7 @@ dependencies:
   sqflite_sqlcipher: ^3.1.0+1
   encrypt: ^5.0.3
   firebase_crashlytics: ^4.2.0
+  flutter_bloc: ^8.1.6
 
 dev_dependencies:
   flutter_test:
@@ -28,6 +29,7 @@ dev_dependencies:
   mockito: ^5.0.8
   build_runner: ^2.0.4
   flutter_lints: ^4.0.0
+  bloc_test: ^9.1.7
 
 flutter:
 

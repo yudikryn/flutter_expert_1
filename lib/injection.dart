@@ -53,25 +53,20 @@ void init() {
       locator(),
     ),
   );
-    locator.registerFactory(
+  locator.registerFactory(
     () => TvSearchBloc(
       locator(),
     ),
   );
-    locator.registerFactory(
-    () => MovieListMoviesBloc(
-      locator(),
-    ),
-  );
-  
-  // provider
   locator.registerFactory(
-    () => MovieListNotifier(
+    () => MovieListBloc(
       getNowPlayingMovies: locator(),
       getPopularMovies: locator(),
       getTopRatedMovies: locator(),
     ),
   );
+  
+  // provider
   locator.registerFactory(
     () => MovieDetailNotifier(
       getMovieDetail: locator(),

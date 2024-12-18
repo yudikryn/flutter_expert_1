@@ -1,8 +1,8 @@
-import '../../core.dart';
-import '../provider/movie/popular_movies_notifier.dart';
+import 'package:core/presentation/bloc/movie/popular/movie_popular_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../widgets/movie_card_list.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class PopularMoviesPage extends StatefulWidget {
   static const ROUTE_NAME = '/popular-movie';
@@ -13,40 +13,34 @@ class PopularMoviesPage extends StatefulWidget {
 
 class _PopularMoviesPageState extends State<PopularMoviesPage> {
   @override
-  void initState() {
-    super.initState();
-    Future.microtask(() =>
-        Provider.of<PopularMoviesNotifier>(context, listen: false)
-            .fetchPopularMovies());
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Popular Movies'),
+        title: const Text('Popular Movies'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<PopularMoviesNotifier>(
-          builder: (context, data, child) {
-            if (data.state == RequestState.Loading) {
-              return Center(
+        child: BlocBuilder<MoviePopularBloc, MoviePopularState>(
+          builder: (context, state) {
+            if (state is MoviePopularLoading) {
+              return const Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (data.state == RequestState.Loaded) {
+            } else if (state is MoviePopularHasData) {
+              final result = state.result;
               return ListView.builder(
                 itemBuilder: (context, index) {
-                  final movie = data.movies[index];
+                  final movie = result[index];
                   return MovieCard(movie);
                 },
-                itemCount: data.movies.length,
+                itemCount: result.length,
               );
+            } else if (state is MoviePopularError) {
+              return Center(child: Text(state.message));
+            } else if (state is MoviePopularEmpty) {
+              return const Center(child: Text('Popular Movies Empty'));
             } else {
-              return Center(
-                key: Key('error_message'),
-                child: Text(data.message),
-              );
+              return const SizedBox.shrink();
             }
           },
         ),

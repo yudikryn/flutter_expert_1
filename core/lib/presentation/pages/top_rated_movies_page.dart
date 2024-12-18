@@ -1,8 +1,8 @@
-import '../../utils/state_enum.dart';
-import '../provider/movie/top_rated_movies_notifier.dart';
+import 'package:core/presentation/bloc/movie/toprated/movie_top_rated_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../widgets/movie_card_list.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class TopRatedMoviesPage extends StatefulWidget {
   static const ROUTE_NAME = '/top-rated-movie';
@@ -12,13 +12,6 @@ class TopRatedMoviesPage extends StatefulWidget {
 }
 
 class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
-  @override
-  void initState() {
-    super.initState();
-    Future.microtask(() =>
-        Provider.of<TopRatedMoviesNotifier>(context, listen: false)
-            .fetchTopRatedMovies());
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,25 +21,27 @@ class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<TopRatedMoviesNotifier>(
-          builder: (context, data, child) {
-            if (data.state == RequestState.Loading) {
-              return Center(
+        child: BlocBuilder<MovieTopRatedBloc, MovieTopRatedState>(
+          builder: (context, state) {
+            if (state is MovieTopRatedLoading) {
+              return const Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (data.state == RequestState.Loaded) {
+            } else if (state is MovieTopRatedHasData) {
+              final result = state.result;
               return ListView.builder(
                 itemBuilder: (context, index) {
-                  final movie = data.movies[index];
+                  final movie = result[index];
                   return MovieCard(movie);
                 },
-                itemCount: data.movies.length,
+                itemCount: result.length,
               );
+            } else if (state is MovieTopRatedError) {
+              return Center(child: Text(state.message));
+            } else if (state is MovieTopRatedEmpty) {
+              return const Center(child: Text('Top Rated Movies Empty'));
             } else {
-              return Center(
-                key: Key('error_message'),
-                child: Text(data.message),
-              );
+              return const SizedBox.shrink();
             }
           },
         ),

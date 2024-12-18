@@ -21,7 +21,7 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: BlocBuilder<MoviePopularBloc, MoviePopularState>(
-          builder: (context, state) {
+          builder: (_, state) {
             if (state is MoviePopularLoading) {
               return const Center(
                 child: CircularProgressIndicator(),
@@ -36,7 +36,8 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
                 itemCount: result.length,
               );
             } else if (state is MoviePopularError) {
-              return Center(child: Text(state.message));
+              return Center(
+                  key: const Key('error_message'), child: Text(state.message));
             } else if (state is MoviePopularEmpty) {
               return const Center(child: Text('Popular Movies Empty'));
             } else {

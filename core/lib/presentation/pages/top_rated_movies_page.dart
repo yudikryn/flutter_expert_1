@@ -1,6 +1,5 @@
-import 'package:core/presentation/bloc/movie/toprated/movie_top_rated_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import '../bloc/movie/toprated/movie_top_rated_bloc.dart';
 import '../widgets/movie_card_list.dart';
 import 'package:flutter/material.dart';
 
@@ -17,12 +16,12 @@ class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Top Rated Movies'),
+        title: const Text('Top Rated Movies'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: BlocBuilder<MovieTopRatedBloc, MovieTopRatedState>(
-          builder: (context, state) {
+          builder: (_, state) {
             if (state is MovieTopRatedLoading) {
               return const Center(
                 child: CircularProgressIndicator(),
@@ -37,7 +36,9 @@ class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
                 itemCount: result.length,
               );
             } else if (state is MovieTopRatedError) {
-              return Center(child: Text(state.message));
+              return Center(
+                key: const Key('error_message'),
+                child: Text(state.message));
             } else if (state is MovieTopRatedEmpty) {
               return const Center(child: Text('Top Rated Movies Empty'));
             } else {

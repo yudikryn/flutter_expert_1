@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:core/utils/encrypt.dart';
+import 'package:flutter/material.dart';
 
 import '../../models/movie_table.dart';
 import '../../models/tv_table.dart';
@@ -30,13 +31,18 @@ class DatabaseHelper {
     final path = await getDatabasesPath();
     final databasePath = '$path/ditonton.db';
 
-    var db = await openDatabase(
-      databasePath,
-      version: 1,
-      onCreate: _onCreate,
-      password: encrypt('dicodingflutter'),
-    );
-    return db;
+    try {
+      var db = await openDatabase(
+        databasePath,
+        version: 1,
+        onCreate: _onCreate,
+        password: encrypt('dicodingflutter'),
+      );
+      return db;
+    } catch (e) {
+      debugPrint('Gagal membuka database: $e');
+      rethrow;
+    }
   }
 
   void _onCreate(Database db, int version) async {

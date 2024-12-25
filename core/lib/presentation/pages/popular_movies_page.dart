@@ -12,6 +12,14 @@ class PopularMoviesPage extends StatefulWidget {
 }
 
 class _PopularMoviesPageState extends State<PopularMoviesPage> {
+
+  @override
+  void initState() {
+    super.initState();
+    Future.microtask(() =>
+        context.read<MoviePopularBloc>().add(const FetchPopularMovies()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

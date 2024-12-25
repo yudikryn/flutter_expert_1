@@ -11,6 +11,13 @@ class TopRatedMoviesPage extends StatefulWidget {
 }
 
 class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
+ 
+  @override
+  void initState() {
+    super.initState();
+    Future.microtask(() =>
+        context.read<MovieTopRatedBloc>().add(const FetchTopRatedMovies()));
+  }
 
   @override
   Widget build(BuildContext context) {

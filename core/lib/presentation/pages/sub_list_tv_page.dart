@@ -1,6 +1,8 @@
-import '../provider/tv/tv_airing_today_notifier.dart';
-import '../provider/tv/tv_popular_notifier.dart';
-import '../provider/tv/tv_top_rated_notifier.dart';
+import 'package:core/presentation/bloc/tv/airingtoday/tv_airing_today_bloc.dart';
+import 'package:core/presentation/bloc/tv/popular/tv_popular_bloc.dart';
+import 'package:core/presentation/bloc/tv/toprated/tv_top_rated_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../widgets/tv_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -23,17 +25,14 @@ class _SubListTvPageState extends State<SubListTvPage> {
     super.initState();
 
     if (widget.type == TYPE_POPULAR) {
-      Future.microtask(() =>
-          Provider.of<TvPopularNotifier>(context, listen: false)
-              .fetchPopularTv());
+      Future.microtask(
+          () => context.read<TvPopularBloc>().add(const FetchPopularTv()));
     } else if (widget.type == TYPE_TOP_RATED) {
-      Future.microtask(() =>
-          Provider.of<TvTopRatedNotifier>(context, listen: false)
-              .fetchTopRatedTv());
+      Future.microtask(
+          () => context.read<TvTopRatedBloc>().add(const FetchTopRatedTv()));
     } else {
       Future.microtask(() =>
-          Provider.of<TvAiringTodayNotifier>(context, listen: false)
-              .fetchAiringTodayTv());
+          context.read<TvAiringTodayBloc>().add(const FetchAiringTodayTv()));
     }
   }
 
@@ -73,75 +72,84 @@ class _SubListTvPageState extends State<SubListTvPage> {
   }
 
   Widget _listTvPopular() {
-    return Consumer<TvPopularNotifier>(
-      builder: (context, data, child) {
-        if (data.popularTvState == RequestState.Loading) {
-          return Center(
+    return BlocBuilder<TvPopularBloc, TvPopularState>(
+      builder: (_, state) {
+        if (state is TvPopularLoading) {
+          return const Center(
             child: CircularProgressIndicator(),
           );
-        } else if (data.popularTvState == RequestState.Loaded) {
+        } else if (state is TvPopularHasData) {
+          final result = state.result;
           return ListView.builder(
             itemBuilder: (context, index) {
-              final tv = data.popularTv[index];
-              return TvCard(tv);
+              final movie = result[index];
+              return TvCard(movie);
             },
-            itemCount: data.popularTv.length,
+            itemCount: result.length,
           );
-        } else {
+        } else if (state is TvPopularError) {
           return Center(
-            key: Key('error_message'),
-            child: Text(data.message),
-          );
+              key: const Key('error_message'), child: Text(state.message));
+        } else if (state is TvPopularEmpty) {
+          return const Center(child: Text('Popular Tv Empty'));
+        } else {
+          return const SizedBox.shrink();
         }
       },
     );
   }
 
   Widget _listTvTopRated() {
-    return Consumer<TvTopRatedNotifier>(
-      builder: (context, data, child) {
-        if (data.topRatedTvState == RequestState.Loading) {
-          return Center(
+    return BlocBuilder<TvTopRatedBloc, TvTopRatedState>(
+      builder: (_, state) {
+        if (state is TvTopRatedLoading) {
+          return const Center(
             child: CircularProgressIndicator(),
           );
-        } else if (data.topRatedTvState == RequestState.Loaded) {
+        } else if (state is TvTopRatedHasData) {
+          final result = state.result;
           return ListView.builder(
             itemBuilder: (context, index) {
-              final tv = data.topRatedTv[index];
-              return TvCard(tv);
+              final movie = result[index];
+              return TvCard(movie);
             },
-            itemCount: data.topRatedTv.length,
+            itemCount: result.length,
           );
-        } else {
+        } else if (state is TvTopRatedError) {
           return Center(
-            key: Key('error_message'),
-            child: Text(data.message),
-          );
+              key: const Key('error_message'), child: Text(state.message));
+        } else if (state is TvTopRatedEmpty) {
+          return const Center(child: Text('Top Rated Tv Empty'));
+        } else {
+          return const SizedBox.shrink();
         }
       },
     );
   }
 
   Widget _listTvAiringToday() {
-    return Consumer<TvAiringTodayNotifier>(
-      builder: (context, data, child) {
-        if (data.topAiringTvState == RequestState.Loading) {
-          return Center(
+    return BlocBuilder<TvAiringTodayBloc, TvAiringTodayState>(
+      builder: (_, state) {
+        if (state is TvAiringTodayLoading) {
+          return const Center(
             child: CircularProgressIndicator(),
           );
-        } else if (data.topAiringTvState == RequestState.Loaded) {
+        } else if (state is TvAiringTodayHasData) {
+          final result = state.result;
           return ListView.builder(
             itemBuilder: (context, index) {
-              final tv = data.airingTodayTv[index];
-              return TvCard(tv);
+              final movie = result[index];
+              return TvCard(movie);
             },
-            itemCount: data.airingTodayTv.length,
+            itemCount: result.length,
           );
-        } else {
+        } else if (state is TvAiringTodayError) {
           return Center(
-            key: Key('error_message'),
-            child: Text(data.message),
-          );
+              key: const Key('error_message'), child: Text(state.message));
+        } else if (state is TvAiringTodayEmpty) {
+          return const Center(child: Text('Airing Today Tv Empty'));
+        } else {
+          return const SizedBox.shrink();
         }
       },
     );

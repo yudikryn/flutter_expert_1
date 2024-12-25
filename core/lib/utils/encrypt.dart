@@ -2,7 +2,7 @@ import 'package:encrypt/encrypt.dart';
 
 String encrypt(String plainText) {
   final key = Key.fromUtf8('my 32 length key................');
-  final iv = IV.fromLength(16);
+  final iv = IV.fromUtf8('fixed16bytesiv12');
 
   final encrypter = Encrypter(AES(key));
 

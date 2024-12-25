@@ -103,11 +103,13 @@ class DatabaseHelper {
   }
 
   Future<int> insertWatchlistTv(TvTable tv) async {
+    debugPrint('jancukaka1 ${tv.toString()}');
     final db = await database;
     return await db!.insert(_tblWatchlistTv, tv.toJson());
   }
 
   Future<int> removeWatchlistTv(TvTable tv) async {
+    debugPrint('jancukaka2 ${tv.toString()}');
     final db = await database;
     return await db!.delete(
       _tblWatchlistTv,

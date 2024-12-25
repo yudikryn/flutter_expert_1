@@ -4,11 +4,13 @@ import 'package:core/presentation/bloc/movie/detail/movie_detail_bloc.dart';
 import 'package:core/presentation/bloc/movie/list/movie_list_bloc.dart';
 import 'package:core/presentation/bloc/movie/popular/movie_popular_bloc.dart';
 import 'package:core/presentation/bloc/movie/toprated/movie_top_rated_bloc.dart';
+import 'package:core/presentation/bloc/movie/watchlist/movie_watchlist_bloc.dart';
 import 'package:core/presentation/bloc/tv/airingtoday/tv_airing_today_bloc.dart';
 import 'package:core/presentation/bloc/tv/detail/tv_detail_bloc.dart';
 import 'package:core/presentation/bloc/tv/list/tv_list_bloc.dart';
 import 'package:core/presentation/bloc/tv/popular/tv_popular_bloc.dart';
 import 'package:core/presentation/bloc/tv/toprated/tv_top_rated_bloc.dart';
+import 'package:core/presentation/bloc/tv/watchlist/tv_watchlist_bloc.dart';
 import 'package:core/presentation/pages/list_tv_page.dart';
 import 'package:core/presentation/pages/movie_detail_page.dart';
 import 'package:core/presentation/pages/home_movie_page.dart';
@@ -17,8 +19,6 @@ import 'package:core/presentation/pages/sub_list_tv_page.dart';
 import 'package:core/presentation/pages/top_rated_movies_page.dart';
 import 'package:core/presentation/pages/tv_detail_page.dart';
 import 'package:core/presentation/pages/watchlist_movies_page.dart';
-import 'package:core/presentation/provider/movie/watchlist_movie_notifier.dart';
-import 'package:core/presentation/provider/tv/tv_watchlist_notifier.dart';
 import 'package:ditonton/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -70,6 +70,12 @@ class MyApp extends StatelessWidget {
           create: (_) => di.locator<MovieDetailBloc>(),
         ),
         BlocProvider(
+          create: (_) => di.locator<MovieWatchlistBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<MovieSearchBloc>(),
+        ),
+        BlocProvider(
           create: (_) => di.locator<TvAiringTodayBloc>(),
         ),
         BlocProvider(
@@ -79,19 +85,13 @@ class MyApp extends StatelessWidget {
           create: (_) => di.locator<TvTopRatedBloc>(),
         ),
         BlocProvider(
-          create: (_) => di.locator<MovieSearchBloc>(),
+          create: (_) => di.locator<TvDetailBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<TvWatchlistBloc>(),
         ),
         BlocProvider(
           create: (_) => di.locator<TvSearchBloc>(),
-        ),
-        BlocProvider(
-          create: (_) => di.locator<TvDetailBloc>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<WatchlistMovieNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TvWatchlistNotifier>(),
         ),
       ],
       child: MaterialApp(

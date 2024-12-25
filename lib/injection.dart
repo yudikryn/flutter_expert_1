@@ -28,13 +28,13 @@ import 'package:core/presentation/bloc/movie/list/movie_list_bloc.dart';
 import 'package:core/presentation/bloc/movie/popular/movie_popular_bloc.dart';
 import 'package:core/presentation/bloc/movie/toprated/movie_top_rated_bloc.dart';
 import 'package:core/presentation/bloc/movie/detail/movie_detail_bloc.dart';
+import 'package:core/presentation/bloc/movie/watchlist/movie_watchlist_bloc.dart';
 import 'package:core/presentation/bloc/tv/airingtoday/tv_airing_today_bloc.dart';
 import 'package:core/presentation/bloc/tv/detail/tv_detail_bloc.dart';
 import 'package:core/presentation/bloc/tv/list/tv_list_bloc.dart';
 import 'package:core/presentation/bloc/tv/popular/tv_popular_bloc.dart';
 import 'package:core/presentation/bloc/tv/toprated/tv_top_rated_bloc.dart';
-import 'package:core/presentation/provider/movie/watchlist_movie_notifier.dart';
-import 'package:core/presentation/provider/tv/tv_watchlist_notifier.dart';
+import 'package:core/presentation/bloc/tv/watchlist/tv_watchlist_bloc.dart';
 import 'package:core/utils/http_ssl_pinning.dart';
 import 'package:search/presentation/bloc/movie/movie_search_bloc.dart';
 import 'package:search/presentation/bloc/tv/tv_search_bloc.dart';
@@ -66,6 +66,11 @@ void init() {
   );
   locator.registerFactory(
     () => MovieTopRatedBloc(
+      locator(),
+    ),
+  );
+  locator.registerFactory(
+    () => MovieWatchlistBloc(
       locator(),
     ),
   );
@@ -108,24 +113,17 @@ void init() {
     ),
   );
   locator.registerFactory(
+    () => TvWatchlistBloc(
+      locator(),
+    ),
+  );
+  locator.registerFactory(
     () => TvDetailBloc(
       getTvDetail: locator(),
       getTvWatchlistStatus: locator(),
       getTvRecommendations: locator(),
       saveTvWatchlist: locator(),
       removeTvWatchlist: locator(),
-    ),
-  );
-  
-  // provider
-  locator.registerFactory(
-    () => WatchlistMovieNotifier(
-      getWatchlistMovies: locator(),
-    ),
-  );
-  locator.registerFactory(
-    () => TvWatchlistNotifier(
-      getTvWatchlist: locator(),
     ),
   );
 

@@ -1,5 +1,6 @@
 import 'package:about/about.dart';
 import 'package:core/core.dart';
+import 'package:core/presentation/bloc/movie/detail/movie_detail_bloc.dart';
 import 'package:core/presentation/bloc/movie/list/movie_list_bloc.dart';
 import 'package:core/presentation/bloc/movie/popular/movie_popular_bloc.dart';
 import 'package:core/presentation/bloc/movie/toprated/movie_top_rated_bloc.dart';
@@ -15,7 +16,6 @@ import 'package:core/presentation/pages/sub_list_tv_page.dart';
 import 'package:core/presentation/pages/top_rated_movies_page.dart';
 import 'package:core/presentation/pages/tv_detail_page.dart';
 import 'package:core/presentation/pages/watchlist_movies_page.dart';
-import 'package:core/presentation/provider/movie/movie_detail_notifier.dart';
 import 'package:core/presentation/provider/movie/watchlist_movie_notifier.dart';
 import 'package:core/presentation/provider/tv/tv_detail_notifier.dart';
 import 'package:core/presentation/provider/tv/tv_watchlist_notifier.dart';
@@ -55,41 +55,34 @@ class MyApp extends StatelessWidget {
               di.locator<MovieListBloc>()..add(const FetchAllMovies()),
         ),
         BlocProvider(
-          create: (_) =>
-              di.locator<TvListBloc>()..add(const FetchAllTv()),
+          create: (_) => di.locator<TvListBloc>()..add(const FetchAllTv()),
         ),
         BlocProvider(
-          create: (_) =>
-              di.locator<MoviePopularBloc>(),
+          create: (_) => di.locator<MoviePopularBloc>(),
         ),
         BlocProvider(
-          create: (_) =>
-              di.locator<MovieTopRatedBloc>(),
+          create: (_) => di.locator<MovieTopRatedBloc>(),
         ),
         BlocProvider(
-          create: (_) =>
-              di.locator<MovieTopRatedBloc>(),
+          create: (_) => di.locator<MovieTopRatedBloc>(),
         ),
         BlocProvider(
-          create: (_) =>
-              di.locator<TvAiringTodayBloc>(),
+          create: (_) => di.locator<MovieDetailBloc>(),
         ),
         BlocProvider(
-          create: (_) =>
-              di.locator<TvPopularBloc>(),
+          create: (_) => di.locator<TvAiringTodayBloc>(),
         ),
         BlocProvider(
-          create: (_) =>
-              di.locator<TvTopRatedBloc>(),
+          create: (_) => di.locator<TvPopularBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<TvTopRatedBloc>(),
         ),
         BlocProvider(
           create: (_) => di.locator<MovieSearchBloc>(),
         ),
         BlocProvider(
           create: (_) => di.locator<TvSearchBloc>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<MovieDetailNotifier>(),
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<WatchlistMovieNotifier>(),

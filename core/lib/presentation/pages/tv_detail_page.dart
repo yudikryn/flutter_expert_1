@@ -103,7 +103,9 @@ class DetailTvContent extends StatelessWidget {
     return Stack(
       children: [
         CachedNetworkImage(
-          imageUrl: 'https://image.tmdb.org/t/p/w500${tvDetail.posterPath}',
+          imageUrl: tvDetail.posterPath != null
+              ? '$BASE_IMAGE_URL${tvDetail.posterPath}'
+              : 'https://via.placeholder.com/500',
           width: screenWidth,
           placeholder: (context, url) => const Center(
             child: CircularProgressIndicator(),
@@ -250,13 +252,13 @@ class DetailTvContent extends StatelessWidget {
           return const Center(
             child: CircularProgressIndicator(),
           );
-        }  else if (recommendationState == RequestState.Loaded) {
+        } else if (recommendationState == RequestState.Loaded) {
           return SizedBox(
             height: 150,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
-                final movie = recommendations[index];
+                final tv = recommendations[index];
                 return Padding(
                   padding: const EdgeInsets.all(4.0),
                   child: InkWell(
@@ -264,7 +266,7 @@ class DetailTvContent extends StatelessWidget {
                       Navigator.pushReplacementNamed(
                         context,
                         TvDetailPage.ROUTE_NAME,
-                        arguments: movie.id,
+                        arguments: tv.id,
                       );
                     },
                     child: ClipRRect(
@@ -272,12 +274,14 @@ class DetailTvContent extends StatelessWidget {
                         Radius.circular(8),
                       ),
                       child: CachedNetworkImage(
-                        imageUrl:
-                            'https://image.tmdb.org/t/p/w500${movie.posterPath}',
+                        imageUrl: tv.posterPath != null
+                            ? '$BASE_IMAGE_URL${tv.posterPath}'
+                            : 'https://via.placeholder.com/500',
                         placeholder: (context, url) => const Center(
                           child: CircularProgressIndicator(),
                         ),
-                        errorWidget: (context, url, error) => const Icon(Icons.error),
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
                       ),
                     ),
                   ),
@@ -286,7 +290,7 @@ class DetailTvContent extends StatelessWidget {
               itemCount: recommendations.length,
             ),
           );
-        }else if (recommendationState == RequestState.Error) {
+        } else if (recommendationState == RequestState.Error) {
           return Text(state.message);
         } else {
           return Container();
@@ -314,20 +318,26 @@ class DetailTvContent extends StatelessWidget {
                       width: 100,
                       height: 150,
                       fit: BoxFit.fill,
-                      imageUrl: '$BASE_IMAGE_URL${season.posterPath}',
+                      imageUrl: season.posterPath != null
+                          ? '$BASE_IMAGE_URL${season.posterPath}'
+                          : 'https://via.placeholder.com/500',
                       placeholder: (context, url) => const Center(
                         child: CircularProgressIndicator(),
                       ),
-                      errorWidget: (context, url, error) => const Icon(Icons.error),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
                     ),
                   ),
-                  Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 16),
+                  const SizedBox(width: 16),
+                  Expanded(
                     child: Text(
                       '${season.name} (${season.episodeCount} episode)',
                       style: kSubtitle,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
                     ),
                   ),
+                  const SizedBox(width: 16),
                 ],
               ),
             ),

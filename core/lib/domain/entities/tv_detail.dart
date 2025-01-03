@@ -20,7 +20,7 @@ class TvDetail extends Equatable {
   final String originalName;
   final String overview;
   final double popularity;
-  final String posterPath;
+  final String? posterPath;
   final List<Season> seasons;
   final String status;
   final String tagline;

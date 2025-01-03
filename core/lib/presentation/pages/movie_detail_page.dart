@@ -104,7 +104,9 @@ class DetailContent extends StatelessWidget {
     return Stack(
       children: [
         CachedNetworkImage(
-          imageUrl: 'https://image.tmdb.org/t/p/w500${movie.posterPath}',
+          imageUrl: movie.posterPath != null
+              ? '$BASE_IMAGE_URL${movie.posterPath}'
+              : 'https://via.placeholder.com/500',
           width: screenWidth,
           placeholder: (context, url) => const Center(
             child: CircularProgressIndicator(),
@@ -217,12 +219,15 @@ class DetailContent extends StatelessWidget {
                                               );
                                             },
                                             child: ClipRRect(
-                                              borderRadius: const BorderRadius.all(
+                                              borderRadius:
+                                                  const BorderRadius.all(
                                                 Radius.circular(8),
                                               ),
                                               child: CachedNetworkImage(
-                                                imageUrl:
-                                                    'https://image.tmdb.org/t/p/w500${movie.posterPath}',
+                                                imageUrl: movie.posterPath !=
+                                                        null
+                                                    ? '$BASE_IMAGE_URL${movie.posterPath}'
+                                                    : 'https://via.placeholder.com/500',
                                                 placeholder: (context, url) =>
                                                     const Center(
                                                   child:

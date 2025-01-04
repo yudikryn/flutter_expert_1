@@ -58,7 +58,9 @@ class MovieCard extends StatelessWidget {
               ),
               child: ClipRRect(
                 child: CachedNetworkImage(
-                  imageUrl: '$BASE_IMAGE_URL${movie.posterPath}',
+                  imageUrl: movie.posterPath != null && movie.posterPath!.isNotEmpty
+                      ? '$BASE_IMAGE_URL${movie.posterPath}'
+                      : 'https://via.placeholder.com/500',
                   width: 80,
                   placeholder: (context, url) => Center(
                     child: CircularProgressIndicator(),

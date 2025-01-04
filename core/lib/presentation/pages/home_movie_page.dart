@@ -199,7 +199,9 @@ class MovieList extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: const BorderRadius.all(Radius.circular(16)),
                 child: CachedNetworkImage(
-                  imageUrl: '$BASE_IMAGE_URL${movie.posterPath}',
+                  imageUrl: movie.posterPath != null && movie.posterPath!.isNotEmpty
+                      ? '$BASE_IMAGE_URL${movie.posterPath}'
+                      : 'https://via.placeholder.com/500',
                   placeholder: (context, url) => const Center(
                     child: CircularProgressIndicator(),
                   ),

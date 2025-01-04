@@ -28,7 +28,7 @@ class SeasonModel extends Equatable {
         id: json["id"],
         name: json["name"],
         overview: json["overview"],
-        posterPath: json["poster_path"],
+        posterPath: json["poster_path"] ?? '',
         seasonNumber: json["season_number"],
         voteAverage: json["vote_average"]?.toDouble(),
       );

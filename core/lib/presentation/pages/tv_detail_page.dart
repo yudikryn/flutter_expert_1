@@ -103,7 +103,7 @@ class DetailTvContent extends StatelessWidget {
     return Stack(
       children: [
         CachedNetworkImage(
-          imageUrl: tvDetail.posterPath != null
+          imageUrl: tvDetail.posterPath != null && tvDetail.posterPath!.isNotEmpty
               ? '$BASE_IMAGE_URL${tvDetail.posterPath}'
               : 'https://via.placeholder.com/500',
           width: screenWidth,
@@ -274,7 +274,7 @@ class DetailTvContent extends StatelessWidget {
                         Radius.circular(8),
                       ),
                       child: CachedNetworkImage(
-                        imageUrl: tv.posterPath != null
+                        imageUrl: tv.posterPath != null && tv.posterPath!.isNotEmpty
                             ? '$BASE_IMAGE_URL${tv.posterPath}'
                             : 'https://via.placeholder.com/500',
                         placeholder: (context, url) => const Center(
@@ -318,7 +318,7 @@ class DetailTvContent extends StatelessWidget {
                       width: 100,
                       height: 150,
                       fit: BoxFit.fill,
-                      imageUrl: season.posterPath != null
+                      imageUrl: season.posterPath != null && season.posterPath!.isNotEmpty
                           ? '$BASE_IMAGE_URL${season.posterPath}'
                           : 'https://via.placeholder.com/500',
                       placeholder: (context, url) => const Center(

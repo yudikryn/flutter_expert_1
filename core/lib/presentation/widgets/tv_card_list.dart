@@ -58,7 +58,9 @@ class TvCard extends StatelessWidget {
               ),
               child: ClipRRect(
                 child: CachedNetworkImage(
-                  imageUrl: '$BASE_IMAGE_URL${tv.posterPath}',
+                  imageUrl: tv.posterPath != null && tv.posterPath!.isNotEmpty
+                      ? '$BASE_IMAGE_URL${tv.posterPath}'
+                      : 'https://via.placeholder.com/500',
                   width: 80,
                   placeholder: (context, url) => Center(
                     child: CircularProgressIndicator(),

@@ -104,7 +104,7 @@ class DetailContent extends StatelessWidget {
     return Stack(
       children: [
         CachedNetworkImage(
-          imageUrl: movie.posterPath != null
+          imageUrl: movie.posterPath != null && movie.posterPath!.isNotEmpty
               ? '$BASE_IMAGE_URL${movie.posterPath}'
               : 'https://via.placeholder.com/500',
           width: screenWidth,
@@ -225,7 +225,7 @@ class DetailContent extends StatelessWidget {
                                               ),
                                               child: CachedNetworkImage(
                                                 imageUrl: movie.posterPath !=
-                                                        null
+                                                        null && movie.posterPath!.isNotEmpty
                                                     ? '$BASE_IMAGE_URL${movie.posterPath}'
                                                     : 'https://via.placeholder.com/500',
                                                 placeholder: (context, url) =>

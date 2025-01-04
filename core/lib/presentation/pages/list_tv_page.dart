@@ -18,7 +18,6 @@ class ListTvPage extends StatefulWidget {
 }
 
 class _ListTvPageState extends State<ListTvPage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,20 +52,18 @@ class _ListTvPageState extends State<ListTvPage> {
                   );
                 },
               ),
-              BlocBuilder<TvListBloc, TvListState>(
-                builder: (_, state) {
+              BlocBuilder<TvListBloc, TvListState>(builder: (_, state) {
                 if (state is AiringTodayTvLoading) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else if (state is TvListCombinedState) {
-                    return TvList(state.airingToday);
-                  } else if (state is AiringTodayTvError) {
-                    return Center(child: Text(state.message));
-                  } else if (state is AiringTodayTvEmpty) {
-                    return const Center(
-                        child: Text('No Airing Today Tv Found'));
-                  } else {
-                    return const SizedBox.shrink();
-                  }
+                  return const Center(child: CircularProgressIndicator());
+                } else if (state is TvListCombinedState) {
+                  return TvList(state.airingToday);
+                } else if (state is AiringTodayTvError) {
+                  return Center(child: Text(state.message));
+                } else if (state is AiringTodayTvEmpty) {
+                  return const Center(child: Text('No Airing Today Tv Found'));
+                } else {
+                  return const SizedBox.shrink();
+                }
               }),
               _buildSubHeading(
                 title: 'Popular',
@@ -78,20 +75,18 @@ class _ListTvPageState extends State<ListTvPage> {
                   );
                 },
               ),
-              BlocBuilder<TvListBloc, TvListState>(
-                builder: (_, state) {
+              BlocBuilder<TvListBloc, TvListState>(builder: (_, state) {
                 if (state is PopularTvLoading) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else if (state is TvListCombinedState) {
-                    return TvList(state.popular);
-                  } else if (state is PopularTvError) {
-                    return Center(child: Text(state.message));
-                  } else if (state is PopularTvEmpty) {
-                    return const Center(
-                        child: Text('No Popular Tv Found'));
-                  } else {
-                    return const SizedBox.shrink();
-                  }
+                  return const Center(child: CircularProgressIndicator());
+                } else if (state is TvListCombinedState) {
+                  return TvList(state.popular);
+                } else if (state is PopularTvError) {
+                  return Center(child: Text(state.message));
+                } else if (state is PopularTvEmpty) {
+                  return const Center(child: Text('No Popular Tv Found'));
+                } else {
+                  return const SizedBox.shrink();
+                }
               }),
               _buildSubHeading(
                 title: 'Top Rated',
@@ -103,20 +98,18 @@ class _ListTvPageState extends State<ListTvPage> {
                   );
                 },
               ),
-              BlocBuilder<TvListBloc, TvListState>(
-                builder: (_, state) {
+              BlocBuilder<TvListBloc, TvListState>(builder: (_, state) {
                 if (state is TopRatedTvLoading) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else if (state is TvListCombinedState) {
-                    return TvList(state.topRated);
-                  } else if (state is TopRatedTvError) {
-                    return Center(child: Text(state.message));
-                  } else if (state is TopRatedTvEmpty) {
-                    return const Center(
-                        child: Text('No Top Rated Tv Found'));
-                  } else {
-                    return const SizedBox.shrink();
-                  }
+                  return const Center(child: CircularProgressIndicator());
+                } else if (state is TvListCombinedState) {
+                  return TvList(state.topRated);
+                } else if (state is TopRatedTvError) {
+                  return Center(child: Text(state.message));
+                } else if (state is TopRatedTvEmpty) {
+                  return const Center(child: Text('No Top Rated Tv Found'));
+                } else {
+                  return const SizedBox.shrink();
+                }
               }),
             ],
           ),
@@ -173,7 +166,9 @@ class TvList extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.all(Radius.circular(16)),
                 child: CachedNetworkImage(
-                  imageUrl: '$BASE_IMAGE_URL${tv.posterPath}',
+                  imageUrl: tv.posterPath != null && tv.posterPath!.isNotEmpty
+                      ? '$BASE_IMAGE_URL${tv.posterPath}'
+                      : 'https://via.placeholder.com/500',
                   placeholder: (context, url) => Center(
                     child: CircularProgressIndicator(),
                   ),

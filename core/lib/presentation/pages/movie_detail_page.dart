@@ -7,7 +7,6 @@ import '../../domain/entities/movie.dart';
 import '../../domain/entities/movie_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:provider/provider.dart';
 
 class MovieDetailPage extends StatefulWidget {
   static const ROUTE_NAME = '/detail';

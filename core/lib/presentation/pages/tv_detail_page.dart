@@ -6,7 +6,6 @@ import '../../domain/entities/tv.dart';
 import '../../domain/entities/tv_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:provider/provider.dart';
 
 import '../../domain/entities/genre.dart';
 import '../../domain/entities/season.dart';

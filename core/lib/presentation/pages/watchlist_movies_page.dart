@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../../utils/utils.dart';
 import '../widgets/movie_card_list.dart';
